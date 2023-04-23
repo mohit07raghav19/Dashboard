@@ -4,59 +4,42 @@ import { tokens } from "../../theme";
 import { mockDataContacts } from "../../data/mockData";
 import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
-
-const Contacts = () => {
+import { gitExporter } from "../../akhilesh/gitdisplayer";
+const Foss = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
+  // console.log(gitExporter);
   const columns = [
     { field: "id", headerName: "ID", flex: 0.5 },
-    { field: "registrarId", headerName: "Registrar ID" },
+    { field: "login", headerName: "Username" },
     {
-      field: "name",
-      headerName: "Name",
-      flex: 1,
-      cellClassName: "name-column--cell",
-    },
-    {
-      field: "age",
-      headerName: "Age",
+      field: "public_repos",
+      headerName: "Repositories",
       type: "number",
       headerAlign: "left",
       align: "left",
     },
     {
-      field: "phone",
-      headerName: "Phone Number",
-      flex: 1,
+      field: "followers",
+      headerName: "Followers",
+      type: "number",
+      headerAlign: "left",
+      align: "left",
     },
     {
-      field: "email",
-      headerName: "Email",
+      field: "html_url",
+      headerName: "Profile Link",
       flex: 1,
+      cellClassName: "name-column--cell",
     },
-    {
-      field: "address",
-      headerName: "Address",
-      flex: 1,
-    },
-    {
-      field: "city",
-      headerName: "City",
-      flex: 1,
-    },
-    {
-      field: "zipCode",
-      headerName: "Zip Code",
-      flex: 1,
-    },
+    
   ];
 
   return (
     <Box m="20px">
       <Header
-        title="CONTACTS"
-        subtitle="List of Contacts for Future Reference"
+        title="Rank List"
+        subtitle="for your Standings in your college"
       />
       <Box
         m="40px 0 0 0"
@@ -91,13 +74,32 @@ const Contacts = () => {
         }}
       >
         <DataGrid
-          rows={mockDataContacts}
+          // rows={mockDataContacts}
+          rows={gitExporter}
           columns={columns}
           components={{ Toolbar: GridToolbar }}
         />
+      </Box>
+      <Box m="20px">
+      <Header
+        title="Roadmap and Resources "
+        subtitle="for procedural and planned structure"
+      /><ul>
+        <li> 
+          Learning Git Language :  <a style={{textDecoration:"none",color:"green"}} href="https://www.w3schools.com">    &nbsp; &nbsp; W3Schools</a></li>
+        <li>
+          Use <a style={{textDecoration:"none",color:"green"}} href='https://www.github.com/'> GitHub </a> and get familiar with it 
+        </li>
+        <li>
+          Create your own Repository and Work on it.
+        </li>
+        <li>
+          Contribute on Some Projects.
+        </li>
+      </ul>
       </Box>
     </Box>
   );
 };
 
-export default Contacts;
+export default Foss;
