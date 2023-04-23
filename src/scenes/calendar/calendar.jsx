@@ -23,6 +23,25 @@ const Calendar = () => {
   const handleDateClick = (selected) => {
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
+    console.log(selected.endStr);
+    console.log(selected.endStr.slice(0,19));
+    let dater1 = selected.endStr.slice(0,19);
+    console.log(dater1)
+    const sliced=dater1.slice(0,19)
+    console.log(sliced)
+    console.log(title);
+    localStorage.setItem("date", sliced);
+    localStorage.setItem("title", title);
+    setCurrentEvents((olditem) => {
+      return [
+        ...olditem,
+        {
+          title: localStorage.getItem("title"),
+          start: localStorage.getItem("date"),
+          allDay: false,
+        },
+      ];
+    });
     calendarApi.unselect();
 
     if (title) {
@@ -52,39 +71,7 @@ const Calendar = () => {
 
       <Box display="flex" justifyContent="space-between">
         {/* CALENDAR SIDEBAR */}
-        <Box
-          flex="1 1 20%"
-          backgroundColor={colors.primary[400]}
-          p="15px"
-          borderRadius="4px"
-        >
-          <Typography variant="h5">Events</Typography>
-          <List>
-            {currentEvents.map((event) => (
-              <ListItem
-                key={event.id}
-                sx={{
-                  backgroundColor: colors.greenAccent[500],
-                  margin: "10px 0",
-                  borderRadius: "2px",
-                }}
-              >
-                <ListItemText
-                  primary={event.title}
-                  secondary={
-                    <Typography>
-                      {formatDate(event.start, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </Typography>
-                  }
-                />
-              </ListItem>
-            ))}
-          </List>
-        </Box>
+        {/*  */}
 
         {/* CALENDAR */}
         <Box flex="1 1 100%" ml="15px">
@@ -101,7 +88,7 @@ const Calendar = () => {
               center: "title",
               right: "dayGridMonth,timeGridWeek,timeGridDay,listMonth",
             }}
-            initialView="dayGridMonth"
+            initialView="timeGridWeek"
             editable={true}
             selectable={true}
             selectMirror={true}
@@ -110,15 +97,73 @@ const Calendar = () => {
             eventClick={handleEventClick}
             eventsSet={(events) => setCurrentEvents(events)}
             initialEvents={[
+              { title: "web dev", start: "2023-04-28T08:00:00", allDay: false },
+              { title: "app dev", start: "2023-04-27T09:00:00", allDay: false },
+              { title: "subj", start: "2023-04-26T05:00:00", allDay: false },
+              { title: "subj", start: "2023-04-23T11:00:00", allDay: false },
+              { title: "subj", start: "2023-04-23T12:00:00", allDay: false },
               {
-                id: "12315",
-                title: "All-day event",
-                date: "2022-09-14",
+                title: "blockchain",
+                start: "2023-04-28T13:00:00",
+                allDay: false,
+              },
+              { title: "subj", start: "2023-04-23T14:00:00", allDay: false },
+              {
+                title: "machine learning",
+                start: "2023-04-27T15:00:00",
+                allDay: false,
+              },
+              { title: "subj", start: "2023-04-28T05:00:00", allDay: false },
+
+              { title: "subj", start: "2023-04-26T19:00:00", allDay: false },
+              { title: "subj", start: "2023-04-29T21:00:00", allDay: false },
+              {
+                title: "Computer Architecture",
+                start: "2023-04-23T21:00:00",
+                allDay: false,
+              },
+              { title: "subj", start: "2023-04-23T22:00:00", allDay: false },
+              { title: "subj", start: "2023-04-25T23:00:00", allDay: false },
+              { title: "subj", start: "2023-04-23T08:00:00", allDay: false },
+
+              {
+                title: "Competitive Programming",
+                start: "2023-04-23T10:00:00",
+                allDay: false,
+              },
+              { title: "subj", start: "2023-04-23T11:00:00", allDay: false },
+
+              {
+                title: "Object-Oriented Programming",
+                start: "2023-04-29T13:00:00",
+                allDay: false,
+              },
+              { title: "subj", start: "2023-04-24T14:00:00", allDay: false },
+              {
+                title: "Competitive Programming",
+                start: "2023-04-23T15:00:00",
+                allDay: false,
+              },
+              { title: "subj", start: "2023-04-23T18:00:00", allDay: false },
+              {
+                title: "Competitive Programming",
+                start: "2023-04-24T07:00:00",
+                allDay: false,
               },
               {
-                id: "5123",
-                title: "Timed event",
-                date: "2022-09-28",
+                title: "Object-Oriented Programming",
+                start: "2023-04-23T02:00:00",
+                allDay: false,
+              },
+              {
+                title: "Computer Architecture",
+                start: "2023-04-23T01:00:00",
+                allDay: false,
+              },
+              {
+                title: localStorage.getItem("title"),
+          start: localStorage.getItem("date"),
+          allDay: false,
               },
             ]}
           />
